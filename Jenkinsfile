@@ -50,7 +50,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'nexus-admin-creds', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
                     sh """
-                        set -euo pipefail
+                        set -eu
                         set +x
                         JAR_FILE=\$(ls target/*.jar | head -1)
                         curl -f -sS -u "\${NEXUS_USER}:\${NEXUS_PASS}" \\
