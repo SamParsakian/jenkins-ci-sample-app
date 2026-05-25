@@ -58,6 +58,8 @@ pipeline {
                           -F maven2.groupId=com.mycompany.app \\
                           -F maven2.artifactId=jenkins-ci-sample-app \\
                           -F maven2.version=1.0-SNAPSHOT \\
+                          -F maven2.generate-pom=true \\
+                          -F maven2.packaging=jar \\
                           -F maven2.asset1=@\${JAR_FILE} \\
                           -F maven2.asset1.extension=jar
                         echo "Uploaded \${JAR_FILE} to Nexus repository ${NEXUS_REPO}"
