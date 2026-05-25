@@ -6,6 +6,8 @@ This Maven application was customized from the official Jenkins tutorial project
 [simple-java-maven-app](https://github.com/jenkins-docs/simple-java-maven-app).
 It demonstrates build, test, and package steps that can be automated in a Jenkins pipeline.
 
+The root **`Jenkinsfile`** currently runs checkout, build/test, and artifact archiving. **SonarQube** quality analysis will be added in a later step.
+
 ## What this app does
 
 - Prints application name, status, environment, Java version, and build tool

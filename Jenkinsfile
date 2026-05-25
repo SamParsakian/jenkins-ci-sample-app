@@ -19,6 +19,22 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube-Server') {
+                    script {
+                        def scannerHome = tool 'SonarQube-Scanner'
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                              -Dsonar.projectKey=jenkins-ci-sample-app \
+                              -Dsonar.sources=src \
+                              -Dsonar.java.binaries=target/classes
+                        """
+                    }
+                }
+            }
+        }
+
         stage('Archive Artifact') {
             steps {
                 archiveArtifacts artifacts: 'target/*.jar'
