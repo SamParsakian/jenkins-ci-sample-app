@@ -53,15 +53,28 @@ pipeline {
                         set -eu
                         set +x
                         JAR_FILE=\$(ls target/*.jar | head -1)
-                        curl -f -sS -u "\${NEXUS_USER}:\${NEXUS_PASS}" \\
-                          -X POST "${NEXUS_URL}/service/rest/v1/components?repository=${NEXUS_REPO}" \\
-                          -F maven2.groupId=com.mycompany.app \\
-                          -F maven2.artifactId=jenkins-ci-sample-app \\
-                          -F maven2.version=1.0-SNAPSHOT \\
-                          -F maven2.generate-pom=true \\
-                          -F maven2.packaging=jar \\
-                          -F maven2.asset1=@\${JAR_FILE} \\
-                          -F maven2.asset1.extension=jar
+                        cat > nexus-settings.xml <<EOF
+<settings>
+  <servers>
+    <server>
+      <id>nexus-snapshots</id>
+      <username>\${NEXUS_USER}</username>
+      <password>\${NEXUS_PASS}</password>
+    </server>
+  </servers>
+</settings>
+EOF
+                        mvn deploy:deploy-file \\
+                          -DrepositoryId=nexus-snapshots \\
+                          -Durl=${NEXUS_URL}/repository/${NEXUS_REPO}/ \\
+                          -Dfile=\${JAR_FILE} \\
+                          -DgroupId=com.mycompany.app \\
+                          -DartifactId=jenkins-ci-sample-app \\
+                          -Dversion=1.0-SNAPSHOT \\
+                          -Dpackaging=jar \\
+                          -DgeneratePom=true \\
+                          -s nexus-settings.xml
+                        rm -f nexus-settings.xml
                         echo "Uploaded \${JAR_FILE} to Nexus repository ${NEXUS_REPO}"
                     """
                 }
