@@ -24,6 +24,12 @@ pipeline {
             }
         }
 
+        stage('Run App Smoke Test') {
+            steps {
+                sh 'java -jar $(ls target/*.jar | head -1)'
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube-Server') {
