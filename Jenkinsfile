@@ -39,8 +39,10 @@ pipeline {
                             mvn dependency:copy-dependencies -DoutputDirectory=target/dependency -q
                             ${scannerHome}/bin/sonar-scanner \
                               -Dsonar.projectKey=jenkins-ci-sample-app \
-                              -Dsonar.sources=src \
+                              -Dsonar.sources=src/main/java \
+                              -Dsonar.tests=src/test/java \
                               -Dsonar.java.binaries=target/classes \
+                              -Dsonar.java.test.binaries=target/test-classes \
                               -Dsonar.java.libraries=target/dependency/*.jar
                         """
                     }
