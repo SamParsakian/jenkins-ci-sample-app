@@ -13,7 +13,7 @@ public class AppTest {
     @Test
     public void testAppName() {
         App app = new App();
-        assertEquals("Jenkins CI/CD App", app.getAppName());
+        assertEquals("Jenkins CI/CD Sample App", app.getAppName());
     }
 
     @Test

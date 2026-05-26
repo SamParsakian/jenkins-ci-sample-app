@@ -5,7 +5,7 @@ package com.mycompany.app;
  */
 public class App {
 
-    private static final String APP_NAME = "Jenkins CI/CD App";
+    private static final String APP_NAME = "Jenkins CI/CD Sample App";
     private static final String STATUS = "Running pipelines successfully";
     private static final String BUILD_TOOL = "Maven";
     private static final String DEFAULT_ENVIRONMENT = "local";
