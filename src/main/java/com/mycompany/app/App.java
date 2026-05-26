@@ -5,12 +5,13 @@ package com.mycompany.app;
  */
 public class App {
 
-    private static final String APP_NAME = "Jenkins CI Sample App";
-    private static final String STATUS = "Running successfully";
+    private static final String APP_NAME = "Jenkins CI/CD Sample App";
+    private static final String STATUS = "Running pipelines successfully";
     private static final String BUILD_TOOL = "Maven";
     private static final String DEFAULT_ENVIRONMENT = "local";
 
-    public App() {}
+    public App() {
+    }
 
     public static void main(String[] args) {
         App app = new App();
