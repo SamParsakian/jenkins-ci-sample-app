@@ -13,7 +13,7 @@ public class AppTest {
     @Test
     public void testAppName() {
         App app = new App();
-        assertEquals("Jenkins CI/CD Sample App", app.getAppName());
+        assertEquals("Jenkins CI/CD App", app.getAppName());
     }
 
     @Test
@@ -39,8 +39,7 @@ public class AppTest {
         String buildInfo = app.getBuildInfo().toLowerCase();
 
         assertTrue(
-            buildInfo.contains("maven") || buildInfo.contains("java"),
-            "Build info should mention Maven or Java"
-        );
+                buildInfo.contains("maven") || buildInfo.contains("java"),
+                "Build info should mention Maven or Java");
     }
 }
