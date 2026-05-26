@@ -36,10 +36,12 @@ pipeline {
                     script {
                         def scannerHome = tool 'SonarQube-Scanner'
                         sh """
+                            mvn dependency:copy-dependencies -DoutputDirectory=target/dependency -q
                             ${scannerHome}/bin/sonar-scanner \
                               -Dsonar.projectKey=jenkins-ci-sample-app \
                               -Dsonar.sources=src \
-                              -Dsonar.java.binaries=target/classes
+                              -Dsonar.java.binaries=target/classes \
+                              -Dsonar.java.libraries=target/dependency/*.jar
                         """
                     }
                 }
